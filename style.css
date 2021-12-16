@@ -1,3 +1,7 @@
+/* =========== Global =========== */
+:root {
+  --color-purple: #363F5F; /* criou uma variável */
+}
 * {
   margin: 0;
   padding: 0;
@@ -9,11 +13,14 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-.container {
-  width: 300px;
-  margin: auto;
+h2 {
+  margin-top: 3.2rem;
+  margin-bottom: 0.8rem; /* margem de baixo */
+  color: var(--color-purple);
+  font-weight: normal; /* peso da fonte (normal, bold, 100, 700) */
 }
 
+/* =========== cabeçalho =========== */
 header {
   background: #2D4A22;
   padding: 2rem 0 10rem;
@@ -25,6 +32,45 @@ header {
   font-weight: 100;
 }
 
+/* =========== corpo =========== */
+.container {
+  width: min(90vw, 800px); /* ocupe 90% da vw ou 800px */
+  margin: auto;
+}
+#balance {
+  margin-top: -8rem;
+}
+#balance h2 {
+  color: white;
+  margin-top: 0;
+}
+
+/* =========== balances=>cards =========== */
+.card {
+  background: white;
+  padding: 1.5rem 2rem; /* espaço de preenchimento */
+  border-radius: 0.25rem; /* bordas com cantos aredondados */
+  margin-bottom: 2rem; /* margem de baixo */
+  color: var(--color-purple);
+}
+
+.card h3 {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.card p {
+  font-size: 2rem;
+  line-height: 3rem; /* espaçamento entre lihas caso haja quebra de linha */
+  margin-top: 1rem;
+}
+
+.card.total {
+  background: #49AA26;
+  color: white;
+}
+
+/* =========== rodapé =========== */
 footer {
   text-align: center;
 }
