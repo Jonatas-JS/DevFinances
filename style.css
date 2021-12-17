@@ -37,6 +37,11 @@ header {
   width: min(90vw, 800px); /* ocupe 90% da vw ou 800px */
   margin: auto;
 }
+
+.sr-only {
+  
+}
+
 #balance {
   margin-top: -8rem;
 }
@@ -106,12 +111,25 @@ table tbody tr {
   opacity: 0.58;
 }
 
-table tbody tr:hover {
+table tbody tr:hover { /* houver=>quando passar o mouse */
   opacity: 1;
+}
+
+td.description {
+  color: var(--color-dark-blue);
+}
+td.income {
+  color: #12A454;
+}
+td.expense {
+  color: #E92929;
 }
 
 /* =========== rodapé =========== */
 footer {
+  color: var(--color-dark-blue);
   text-align: center;
+  padding: 4rem 0 2rem;
+  opacity: 0.58;
 }
 
