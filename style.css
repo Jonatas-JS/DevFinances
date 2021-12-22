@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 93.75%;
+}
+
 body {
   background: #F0F2F5;
   font-family: 'Poppins', sans-serif;
@@ -65,7 +69,7 @@ header {
 
   display: flex; /* um ao lado do outro */
   align-items: center; /* centralizar no eixo X */
-  justify-content: space-between; /* ajustar itens as extremidades */
+  justify-content: space-between; /* ajustar espaço entre eles */
 }
 
 .card p {
@@ -79,10 +83,28 @@ header {
   color: white;
 }
 
+/* =========== button-function =========== */
+a {
+  color: #49AA26;
+  text-decoration: none;
+}
+a:hover {
+  color: #3DD705;
+}
+.button.new {
+  /* declarei como class="button new" no HTML => quando vou dar atributos a elas colocando juntas (.button.new{}) 
+  estou dizendo, busque uma classe declarada junta "button new".
+  => quando vou dar atribustos a elas separadas (.button .new{}) estou dizendo, procure uma classe "new" que está
+  dentro de uma classe "button". */
+  display: inline-block; /* 'inline'=>são dados atributos apenas ao tamanho da caixa, mas, não funciona o margin-bottom
+'block'=>preenche/ocupa toda a linha, mas funciona o margin-bottom */
+  margin-bottom: .8rem;
+}
+
 /* =========== table =========== */
 #data-table {
   width: 100%;
-  color: #969CB3; 
+  color: #969CB3;
   border-spacing: 0 0.5rem; /* largura-da-borda-vertical | largura-da-borda-horizontal */
 }
 
