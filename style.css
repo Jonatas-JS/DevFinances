@@ -17,13 +17,6 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-h2 {
-  margin-top: 3.2rem;
-  margin-bottom: 0.8rem; /* margem de baixo */
-  color: var(--color-dark-blue);
-  font-weight: normal; /* peso da fonte (normal, bold, 100, 700) */
-}
-
 /* =========== cabeçalho =========== */
 header {
   background: #2D4A22;
@@ -42,16 +35,15 @@ header {
   margin: auto;
 }
 
-.sr-only {
-  
+h2 {
+  color: var(--color-dark-blue);
+  font-weight: 700;
 }
 
-#balance {
-  margin-top: -8rem;
-}
-#balance h2 {
+.balance-title {
   color: white;
-  margin-top: 0;
+  margin-top: -7rem;
+  margin-bottom: .8rem;
 }
 
 /* =========== balances=>cards =========== */
@@ -103,9 +95,11 @@ a:hover {
 
 /* =========== table =========== */
 #data-table {
+  display: block;
   width: 100%;
   color: #969CB3;
   border-spacing: 0 0.5rem; /* largura-da-borda-vertical | largura-da-borda-horizontal */
+  overflow-x: auto;
 }
 
 table thead th {
@@ -159,3 +153,14 @@ footer {
   opacity: 0.58;
 }
 
+/* =========== responsive =========== */
+@media (min-width: 800px) {
+  html {
+    font-size: 87.5%;
+  }
+  #balance {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* fr=fração | tbm posso usar 1fr 1fr 1fr */
+    gap: 2rem;
+  }
+}
