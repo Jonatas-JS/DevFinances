@@ -93,13 +93,16 @@ a:hover {
   margin-bottom: .8rem;
 }
 
+#transactions {
+  display: block;
+  overflow-x: auto;
+}
+
 /* =========== table =========== */
 #data-table {
-  display: block;
-  width: 100%;
   color: #969CB3;
   border-spacing: 0 0.5rem; /* largura-da-borda-vertical | largura-da-borda-horizontal */
-  overflow-x: auto;
+
 }
 
 table thead th {
