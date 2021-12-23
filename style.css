@@ -93,16 +93,13 @@ a:hover {
   margin-bottom: .8rem;
 }
 
-#transactions {
-  display: block;
-  overflow-x: auto;
-}
-
 /* =========== table =========== */
 #data-table {
+  display: block;
+  width: 100%;
   color: #969CB3;
   border-spacing: 0 0.5rem; /* largura-da-borda-vertical | largura-da-borda-horizontal */
-
+  overflow-x: auto;
 }
 
 table thead th {
@@ -148,6 +145,23 @@ td.expense {
   color: #E92929;
 }
 
+/* =========== modal =========== */
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.7);
+  backdrop-filter: blur(1px);
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: #F0F2F5;
+  padding: 2.4rem;
+}
+
 /* =========== rodapé =========== */
 footer {
   color: var(--color-dark-blue);
@@ -165,5 +179,14 @@ footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* fr=fração | tbm posso usar 1fr 1fr 1fr */
     gap: 2rem;
+  }
+}
+@media (min-width: 554px) {
+  #transactions {
+    width: 100%;
+  }
+  #data-table {
+    width: 100%;
+    display: inline-table;
   }
 }
