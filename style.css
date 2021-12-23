@@ -1,6 +1,9 @@
 /* =========== Global =========== */
 :root {
   --color-dark-blue: #363F5F; /* criou uma variável */
+  --color-dark-green: #49AA26;
+  --color-light-green: #3DD705;
+  --color-red: #E92929;
 }
 * {
   margin: 0;
@@ -71,18 +74,19 @@ h2 {
 }
 
 .card.total {
-  background: #49AA26;
+  background: var(--color-dark-green);
   color: white;
 }
 
 /* =========== button-function =========== */
 a {
-  color: #49AA26;
+  color: var(--color-dark-green);
   text-decoration: none;
 }
 a:hover {
-  color: #3DD705;
+  color: var(--color-light-green);
 }
+
 .button.new {
   /* declarei como class="button new" no HTML => quando vou dar atributos a elas colocando juntas (.button.new{}) 
   estou dizendo, busque uma classe declarada junta "button new".
@@ -91,6 +95,34 @@ a:hover {
   display: inline-block; /* 'inline'=>são dados atributos apenas ao tamanho da caixa, mas, não funciona o margin-bottom
 'block'=>preenche/ocupa toda a linha, mas funciona o margin-bottom */
   margin-bottom: .8rem;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: normal;
+  width: 100%;
+  height: 50px;
+  border: none;
+  color: white;
+  background: var(--color-dark-green);
+  border-radius: .25rem;
+  cursor: pointer;
+}
+button:hover {
+  background: var(--color-light-green);
+}
+
+.button.cancel {
+  color: var(--color-red);
+  border: 2px var(--color-red) solid;
+  height: 50px;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button.cancel:hover {
+  opacity: 1;
 }
 
 /* =========== table =========== */
@@ -156,10 +188,54 @@ td.expense {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  opacity: 0;
+  visibility: hidden; /* esconder o modal */
 }
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+/* .modal-overlay.active label {
+  display: block; => faz com que o texto-título do campo ocupe todo o espaço
+} */
 .modal {
   background: #F0F2F5;
   padding: 2.4rem;
+  width: 90%;
+  max-width: 500px;
+  border-radius: .25rem;
+}
+
+/* =========== form =========== */
+#form {
+  max-width: 500px;
+}
+#form h2 {
+  margin-top: 0;
+}
+#form form input {
+  border: none;
+  border-radius: .25rem;
+  padding: .8rem;
+  width: 100%;
+}
+
+#form .input-group {
+  margin-top: .8rem;
+}
+#form small {
+  opacity: 0.4;
+}
+#form .input-group.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#form .input-group.actions .button,
+#form .input-group.actions button {
+  width: 48%;
 }
 
 /* =========== rodapé =========== */
