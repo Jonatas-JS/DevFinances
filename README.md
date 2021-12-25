@@ -4,7 +4,7 @@
 Projeto no Figma: https://www.figma.com/file/d1ryJU0RWxz1LwN5P4aqtG/dev.finance%24-Maratona-Discover-(Copy)?node-id=0%3A1
 
 * O resultado foi esse...
-<img src=".github/assets/img01.png" width="100%">
-<img src=".github/assets/img02.png" width="100%">
-<img src=".github/assets/img03.png" height="100%">
-<img src=".github/assets/img04.png" height="100%">
+<p align="center"><img src=".github/assets/img01.png" width="100%"></p>
+<p align="center"><img src=".github/assets/img02.png" width="100%"></p>
+<p align="center"><img src=".github/assets/img03.png" height="100%"></p>
+<p align="center"><img src=".github/assets/img04.png" height="100%"></p>
