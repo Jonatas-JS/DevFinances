@@ -13,40 +13,37 @@ const Modal = { // criado a constante Modal
   }
 }
 
-
-const transactions = [ // entrada de dados
-  {
-    id: 1,
-    description: 'Luz',
-    amount: -50000,
-    date: '23/01/2021',
-  }, 
-  {
-    id: 2,
-    description: 'Criação Website',
-    amount: 500000,
-    date: '23/01/2021',
-  }, 
-  {
-    id: 3,
-    description: 'Internet',
-    amount: -20000,
-    date: '23/01/2021',
-  },
-  {
-    id: 4,
-    description: 'App',
-    amount: 200000,
-    date: '25/02/2021',
-  }
-]
-
 const Transaction = {  // cálculos
-  all: transactions, //pegando tudo que está no trasactions
+  all: [ // entrada de dados
+    {
+      id: 1,
+      description: 'Luz',
+      amount: -50000,
+      date: '23/01/2021',
+    }, 
+    {
+      id: 2,
+      description: 'Criação Website',
+      amount: 500000,
+      date: '23/01/2021',
+    }, 
+    {
+      id: 3,
+      description: 'Internet',
+      amount: -20000,
+      date: '23/01/2021',
+    },
+    {
+      id: 4,
+      description: 'App',
+      amount: 200000,
+      date: '25/02/2021',
+    }
+  ], //pegando tudo que está no trasactions
 
   add(transaction){
     Transaction.all.push(transaction)
-    App.reload()
+    App.reload() // limpa todas as antigas transações
   },
 
   remove(index) {
@@ -78,6 +75,7 @@ const Transaction = {  // cálculos
     return Transaction.incomes() + Transaction.expenses();
   }
 }
+
 
 const DOM = {
   transactionContainer: document.querySelector('#data-table tbody'),
@@ -119,13 +117,19 @@ const DOM = {
 }
 
 const Utils = {
+  formatAmount(value) {
+    value = Number(value) * 100
+  },
+
+  formatDate(date) {
+    const splittedDate = date.split("-") //split=>separador
+   return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+  },
+
   formatCurrency(value) {
     const signal = Number(value) < 0 ? "-" : ""
-
     value = String(value).replace(/\D/g, "") //remoção de qualquer caractere especial
-
     value = Number(value) / 100 // colocar 2 casas após a vigura
-
     value = value.toLocaleString("pt-BR", { // dando caractericas do R$
       style: "currency",
       currency: "BRL"
@@ -134,12 +138,69 @@ const Utils = {
   }
 }
 
+const Form = {
+  description: document.querySelector('input#description'),
+  amount: document.querySelector('input#amount'),
+  date: document.querySelector('input#date'),
+
+  getValues() {
+    return {
+      description: Form.description.value,
+      amount: Form.amount.value,
+      date: Form.date.value
+    }
+  },
+
+  validateFields() {
+    const { description, amount, date } = Form.getValues()
+
+    if(
+      description.trim() === "" ||
+      amount.trim() === "" ||
+      date.trim() === "") {
+        throw new Error("Por favor, preencha todos os campos")
+      }
+  },
+
+  formatValues() {
+    let { description, amount, date } = Form.getValues()
+
+    amount = Utils.formatAmount(amount)
+    date = Utils.formatDate(date)
+
+    return {
+      description,
+      amount,
+      date
+    }
+  },
+
+  clearFields() {
+    Form.description.value = ""
+    Form.amount.value = ""
+    Form.date.value = ""
+  },
+
+  submit(event) {
+    event.preventDefault()
+
+    try {
+      Form.validateFields() //verificar se os campos não estão vazios
+      const transaction = Form.formatValues() // formatar os dados recebidos
+      Transaction.add(transaction) //adicionar dados
+      Form.clearFields() // limpar todos os campos
+      Modal.close() //fechar o modal
+
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+}
+
 const App = {
   init () {
     // transactions.forEach(funcion)=>para cada transação do transactions faça..
-    Transaction.all.forEach(transaction => {
-      DOM.addTransaction(transaction)
-    })
+    Transaction.all.forEach(DOM.addTransaction)
 
     DOM.updateBalance()
   },
