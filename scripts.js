@@ -13,33 +13,18 @@ const Modal = { // criado a constante Modal
   }
 }
 
+const Storage = {
+  get() { // tenho que transformar novamente a string em array
+    // retorna o dev.finances:transactions OU uma array vazia
+    return JSON.parse(localStorage.getItem("dev.finances:transactions")) || []
+  },
+  set(transactions) { //setando os itens, transforma o array em string
+    localStorage.setItem("dev.finances:transactions", JSON.stringify(transactions))
+  }
+}
+
 const Transaction = {  // cálculos
-  all: [ // entrada de dados
-    {
-      id: 1,
-      description: 'Luz',
-      amount: -50000,
-      date: '23/01/2021',
-    }, 
-    {
-      id: 2,
-      description: 'Criação Website',
-      amount: 500000,
-      date: '23/01/2021',
-    }, 
-    {
-      id: 3,
-      description: 'Internet',
-      amount: -20000,
-      date: '23/01/2021',
-    },
-    {
-      id: 4,
-      description: 'App',
-      amount: 200000,
-      date: '25/02/2021',
-    }
-  ], //pegando tudo que está no trasactions
+  all: Storage.get(), // entrada de dados
 
   add(transaction){
     Transaction.all.push(transaction)
@@ -82,12 +67,13 @@ const DOM = {
 
   addTransaction(transaction, index) {
     const tr = document.createElement('tr')  // criado o elemento tr(linha) no HTML
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction)
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
+    tr.dataset.index = index
 
     DOM.transactionContainer.appendChild(tr)
   },
 
-  innerHTMLTransaction (transaction) {
+  innerHTMLTransaction (transaction, index) {
     const CSSclass = transaction.amount > 0 ? "income" : "expense"
 
     const amount = Utils.formatCurrency(transaction.amount)
@@ -99,7 +85,7 @@ const DOM = {
     <td class="${CSSclass}">${amount}</td>
     <td class="date">${transaction.date}</td>
     <td>
-      <img src="./assets/minus.svg" alt="remover transação">
+      <img onclick="Transaction.remove(${index}) "src="./assets/minus.svg" alt="remover transação">
     </td>
     `
     return html
@@ -118,7 +104,8 @@ const DOM = {
 
 const Utils = {
   formatAmount(value) {
-    value = Number(value) * 100
+    value = Number(value.replace(/\,\./g, "")) * 100
+    return value
   },
 
   formatDate(date) {
@@ -131,11 +118,12 @@ const Utils = {
     value = String(value).replace(/\D/g, "") //remoção de qualquer caractere especial
     value = Number(value) / 100 // colocar 2 casas após a vigura
     value = value.toLocaleString("pt-BR", { // dando caractericas do R$
-      style: "currency",
-      currency: "BRL"
+        style: "currency",
+        currency: "BRL"
     })
-    return signal + value
-  }
+
+   return signal + value
+}
 }
 
 const Form = {
@@ -157,7 +145,7 @@ const Form = {
     if(
       description.trim() === "" ||
       amount.trim() === "" ||
-      date.trim() === "") {
+      date.trim() === "" ) {
         throw new Error("Por favor, preencha todos os campos")
       }
   },
@@ -190,7 +178,6 @@ const Form = {
       Transaction.add(transaction) //adicionar dados
       Form.clearFields() // limpar todos os campos
       Modal.close() //fechar o modal
-
     } catch (error) {
       alert(error.message)
     }
@@ -203,6 +190,8 @@ const App = {
     Transaction.all.forEach(DOM.addTransaction)
 
     DOM.updateBalance()
+
+    Storage.set(Transaction.all)
   },
   reload () {
     DOM.clearTransactions() // toda vez que for para o reload ele vai limpar todas as Transactions
