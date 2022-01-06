@@ -1,6 +1,7 @@
-# DevFinance$ - Discovery - Rocketseat
+# Trilha Discovery -- DevFinance$ -- Rocketseat
 
 * Projeto feito com o intuito de ter um sistema financeiro básico que mostra os Jobs feitos e seus valores, além de ter um controle de entra e saída de valores.
+* Com o complemento JavaSript é possível fazer as transações, os dados usados ficarão armazenados no localStorage do navegador.
 * O layout já está todo responsivo e funcional.
 
 Projeto no Figma: https://www.figma.com/file/7Vu9DzUaCZIV4nibzkjgB4/dev.finance-Maratona-Discover/duplicate
